@@ -99,35 +99,11 @@ int DiscreteGradient::setCriticalPoints(
 
   const auto nCritPoints = partSums.back();
 
-#ifdef TTK_ENABLE_OPENMP
-#pragma omp parallel master num_threads(threadNumber_)
-#endif
-  {
-#ifdef TTK_ENABLE_OPENMP
-#pragma omp task
-#endif
-    { points.resize(nCritPoints); }
-
-#ifdef TTK_ENABLE_OPENMP
-#pragma omp task
-#endif
-    { cellDimensions.resize(nCritPoints); }
-
-#ifdef TTK_ENABLE_OPENMP
-#pragma omp task
-#endif
-    { cellIds.resize(nCritPoints); }
-
-#ifdef TTK_ENABLE_OPENMP
-#pragma omp task
-#endif
-    { isOnBoundary.resize(nCritPoints); }
-
-#ifdef TTK_ENABLE_OPENMP
-#pragma omp task
-#endif
-    { PLVertexIdentifiers.resize(nCritPoints); }
-  }
+  points.resize(nCritPoints);
+  cellDimensions.resize(nCritPoints);
+  cellIds.resize(nCritPoints);
+  isOnBoundary.resize(nCritPoints);
+  PLVertexIdentifiers.resize(nCritPoints);
 
   for(size_t i = 0; i < criticalCellsByDim.size(); ++i) {
 #ifdef TTK_ENABLE_OPENMP
