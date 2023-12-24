@@ -166,26 +166,62 @@ namespace ttk {
         mt_data_.leaves.reserve(scalars_->size / 3);
 
         // Known size
+#ifdef TTK_ENABLE_OPENMP
+#pragma omp parallel master num_threads(threadNumber_)
+#endif
+        {
 
-        createVector<idCorresp>(mt_data_.vert2tree);
-        mt_data_.vert2tree.resize(scalars_->size);
+#ifdef TTK_ENABLE_OPENMP
+#pragma omp task
+#endif
+          {
+            createVector<idCorresp>(mt_data_.vert2tree);
+            mt_data_.vert2tree.resize(scalars_->size);
+          }
 
-        createVector<std::list<std::vector<SimplexId>>>(mt_data_.trunkSegments);
+#ifdef TTK_ENABLE_OPENMP
+#pragma omp task
+#endif
+          {
+            createVector<std::list<std::vector<SimplexId>>>(
+              mt_data_.trunkSegments);
 
-        createVector<SimplexId>(mt_data_.visitOrder);
-        mt_data_.visitOrder.resize(scalars_->size);
+            createVector<SimplexId>(mt_data_.visitOrder);
+            mt_data_.visitOrder.resize(scalars_->size);
+          }
 
-        createVector<UF>(mt_data_.ufs);
-        mt_data_.ufs.resize(scalars_->size);
+#ifdef TTK_ENABLE_OPENMP
+#pragma omp task
+#endif
+          {
+            createVector<UF>(mt_data_.ufs);
+            mt_data_.ufs.resize(scalars_->size);
+          }
 
-        createVector<UF>(mt_data_.propagation);
-        mt_data_.propagation.resize(scalars_->size);
+#ifdef TTK_ENABLE_OPENMP
+#pragma omp task
+#endif
+          {
+            createVector<UF>(mt_data_.propagation);
+            mt_data_.propagation.resize(scalars_->size);
+          }
 
-        createVector<valence>(mt_data_.valences);
-        mt_data_.valences.resize(scalars_->size);
+#ifdef TTK_ENABLE_OPENMP
+#pragma omp task
+#endif
+          {
+            createVector<valence>(mt_data_.valences);
+            mt_data_.valences.resize(scalars_->size);
+          }
 
-        createVector<char>(mt_data_.openedNodes);
-        mt_data_.openedNodes.resize(scalars_->size);
+#ifdef TTK_ENABLE_OPENMP
+#pragma omp task
+#endif
+          {
+            createVector<char>(mt_data_.openedNodes);
+            mt_data_.openedNodes.resize(scalars_->size);
+          }
+        }
 
         mt_data_.segments_.clear();
       }
