@@ -916,7 +916,9 @@ vector<idNode> FTMTree_MT::sortedNodes(const bool para) {
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp single
 #endif
-    { std::sort(sortedNodes.begin(), sortedNodes.end(), indirect_sort); }
+    {
+      std::sort(sortedNodes.begin(), sortedNodes.end(), indirect_sort);
+    }
   }
 
   return sortedNodes;

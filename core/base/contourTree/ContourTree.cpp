@@ -2703,17 +2703,23 @@ int ContourTree::computeSkeleton(unsigned int arcResolution) {
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { SubLevelSetTree::computeSkeleton(arcResolution); }
+    {
+      SubLevelSetTree::computeSkeleton(arcResolution);
+    }
 
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { mergeTree_.computeSkeleton(arcResolution); }
+    {
+      mergeTree_.computeSkeleton(arcResolution);
+    }
 
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { splitTree_.computeSkeleton(arcResolution); }
+    {
+      splitTree_.computeSkeleton(arcResolution);
+    }
   }
 
   return 0;
@@ -2727,17 +2733,23 @@ int ContourTree::smoothSkeleton(unsigned int skeletonSmoothing) {
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { SubLevelSetTree::smoothSkeleton(skeletonSmoothing); }
+    {
+      SubLevelSetTree::smoothSkeleton(skeletonSmoothing);
+    }
 
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { mergeTree_.smoothSkeleton(skeletonSmoothing); }
+    {
+      mergeTree_.smoothSkeleton(skeletonSmoothing);
+    }
 
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { splitTree_.smoothSkeleton(skeletonSmoothing); }
+    {
+      splitTree_.smoothSkeleton(skeletonSmoothing);
+    }
   }
 
   return 0;
@@ -2751,17 +2763,23 @@ int ContourTree::clearSkeleton() {
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { SubLevelSetTree::clearSkeleton(); }
+    {
+      SubLevelSetTree::clearSkeleton();
+    }
 
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { mergeTree_.clearSkeleton(); }
+    {
+      mergeTree_.clearSkeleton();
+    }
 
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { splitTree_.clearSkeleton(); }
+    {
+      splitTree_.clearSkeleton();
+    }
   }
 
   return 0;
@@ -2892,12 +2910,16 @@ int ContourTree::simplify(const double &simplificationThreshold,
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { mergeTree_.simplify(simplificationThreshold, metric); }
+    {
+      mergeTree_.simplify(simplificationThreshold, metric);
+    }
 
 #ifdef TTK_ENABLE_OPENMP
 #pragma omp section
 #endif
-    { splitTree_.simplify(simplificationThreshold, metric); }
+    {
+      splitTree_.simplify(simplificationThreshold, metric);
+    }
   }
 
   return 0;
